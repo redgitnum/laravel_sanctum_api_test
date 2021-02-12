@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use Laravel\Sanctum\Sanctum;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/', function() {
-    return view('welcome');
-});
+Route::post('/login', [UserController::class, 'login'])->middleware('auth:sanctum');
+Route::post('/register', [UserController::class, 'create']);
